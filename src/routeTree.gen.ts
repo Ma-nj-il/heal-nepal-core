@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareerRouteImport } from './routes/career'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/nuronix': typeof NuronixRoute
   '/products': typeof ProductsRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/nuronix': typeof NuronixRoute
   '/products': typeof ProductsRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,12 +79,27 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/nuronix': typeof NuronixRoute
   '/products': typeof ProductsRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/career' | '/contact' | '/nuronix' | '/products'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/career'
+    | '/contact'
+    | '/nuronix'
+    | '/products'
+    | '/admin/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/career' | '/contact' | '/nuronix' | '/products'
+  to:
+    | '/'
+    | '/about'
+    | '/career'
+    | '/contact'
+    | '/nuronix'
+    | '/products'
+    | '/admin/login'
   id:
     | '__root__'
     | '/'
@@ -85,6 +108,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/nuronix'
     | '/products'
+    | '/admin/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +118,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   NuronixRoute: typeof NuronixRoute
   ProductsRoute: typeof ProductsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -150,7 +182,17 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   NuronixRoute: NuronixRoute,
   ProductsRoute: ProductsRoute,
+  AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
