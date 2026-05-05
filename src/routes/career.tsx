@@ -115,8 +115,8 @@ function CareerPage() {
         <SectionHeader eyebrow="Need Help?" title="Questions About Joining Growfund?" />
         <div className="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
           {[
-            [Mail, "Email", "careers@growfund.com.np"],
-            [Phone, "Call HR", "+977-1-XXXXXXX"],
+            [Mail, "Email", "admin@growfund.com.np"],
+            [Phone, "Call HR", "+977- 9745875081"],
             [MessageCircle, "WhatsApp", "Quick questions welcome"],
           ].map(([Icon, t, v]) => {
             const I = Icon as typeof Mail;
