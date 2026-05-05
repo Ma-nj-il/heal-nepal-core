@@ -57,12 +57,26 @@ function ContactPage() {
       return;
     }
     setSubmitting(true);
-    console.log("Contact form submission:", r.data);
-    setTimeout(() => {
+    (async () => {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: r.data.name,
+        organization: r.data.org,
+        email: r.data.email,
+        phone: r.data.phone,
+        province: r.data.province,
+        role: r.data.role,
+        subject: r.data.subject,
+        message: r.data.message,
+      });
+      setSubmitting(false);
+      if (error) {
+        toast.error("Could not send. Please try again.");
+        return;
+      }
       toast.success("Message sent! We'll respond within 24 hours.");
       form.reset();
-      setSubmitting(false);
-    }, 700);
+    })();
   }
 
   return (
