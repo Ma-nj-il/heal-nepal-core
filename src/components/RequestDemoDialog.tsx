@@ -34,12 +34,24 @@ export function RequestDemoDialog({ trigger }: { trigger: React.ReactNode }) {
       return;
     }
     setSubmitting(true);
-    console.log("Demo request:", r.data);
-    setTimeout(() => {
-      toast.success("Demo request received! Our team will reach out within 24 hours.");
+    (async () => {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error } = await supabase.from("demo_requests").insert({
+        name: r.data.name,
+        organization: r.data.org,
+        email: r.data.email,
+        phone: r.data.phone,
+        facility_type: r.data.type,
+        notes: r.data.notes || null,
+      });
       setSubmitting(false);
+      if (error) {
+        toast.error("Could not submit. Please try again.");
+        return;
+      }
+      toast.success("Demo request received! Our team will reach out within 24 hours.");
       setOpen(false);
-    }, 700);
+    })();
   }
 
   return (
