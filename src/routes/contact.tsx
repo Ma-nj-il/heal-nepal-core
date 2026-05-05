@@ -126,9 +126,9 @@ function ContactPage() {
             <div className="rounded-2xl border bg-brand-soft-gradient p-7 shadow-soft">
               <h3 className="font-display font-bold text-brand-deep text-lg mb-4">Get in Touch</h3>
               <ul className="space-y-4 text-sm">
-                <Info icon={MapPin} label="Office" value="Kathmandu, Nepal" />
-                <Info icon={Mail} label="Email" value="info@growfund.com.np" />
-                <Info icon={Phone} label="Phone" value="+977-1-XXXXXXX" />
+                <Info icon={MapPin} label="Office" value="Budhanilkantha-11,Kathmandu, Nepal" />
+                <Info icon={Mail} label="Email" value="admin@growfund.com.np" />
+                <Info icon={Phone} label="Phone" value="+977- 9745875081" />
                 <Info icon={MessageCircle} label="WhatsApp" value="Support available" />
                 <Info icon={Clock} label="Office Hours" value="Sun–Fri, 9 AM – 6 PM (NST)" />
               </ul>

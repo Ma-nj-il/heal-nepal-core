@@ -1,6 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { Github, Linkedin, Twitter, Facebook, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import logo from "/logo-growfund.png?url";
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    Icon: LinkedInIcon,
+    url:"https://www.linkedin.com/company/107913754/admin/dashboard/",
+  },
+  {
+    label: "Twitter",
+    Icon: TwitterIcon,
+    url: "https://twitter.com/growfund",
+  },
+  {
+    label: "Facebook",
+    Icon: FacebookIcon,
+    url: "https://facebook.com/growfund",
+  },
+] as const;
 
 export function SiteFooter() {
   return (
@@ -15,8 +33,8 @@ export function SiteFooter() {
             Powering Nepal's Digital Health Revolution.
           </p>
           <div className="flex items-center gap-3 mt-5">
-            {[Linkedin, Github, Twitter, Facebook].map((Icon, i) => (
-              <a key={i} href="#" aria-label="social" className="h-9 w-9 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 transition">
+            {socialLinks.map(({ label, Icon, url }) => (
+              <a key={label} href={url} aria-label={label} className="h-9 w-9 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 transition">
                 <Icon className="h-4 w-4" />
               </a>
             ))}
@@ -55,6 +73,38 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M6.94 6.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.5 8.75h3v11h-3v-11ZM9.5 8.75h2.88v1.5h.04c.4-.76 1.39-1.56 2.86-1.56 3.06 0 3.62 2.01 3.62 4.62v6.44h-3v-5.71c0-1.36-.02-3.1-1.89-3.1-1.9 0-2.19 1.49-2.19 3.01v5.8h-3v-11Z" />
+    </svg>
+  );
+}
+
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.8-.25.8-.56v-2.02c-3.25.71-3.94-1.57-3.94-1.57-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.09 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.76.4-1.26.73-1.55-2.6-.3-5.34-1.3-5.34-5.79 0-1.28.46-2.33 1.2-3.15-.12-.3-.52-1.52.11-3.16 0 0 .98-.31 3.2 1.2a11 11 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.64.23 2.86.11 3.16.75.82 1.2 1.87 1.2 3.15 0 4.5-2.74 5.48-5.35 5.78.41.35.77 1.05.77 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+    </svg>
+  );
+}
+
+function TwitterIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M18.9 2.25h3.68l-8.04 9.2 9.47 12.3h-7.4l-5.81-7.58-6.6 7.58H.52l8.6-9.85L0 2.25h7.59l5.28 6.91 6.03-6.91Zm-1.3 19.33h2.04L6.48 4.34H4.29l13.3 17.24Z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M13.5 22v-8.5h2.85l.43-3.31H13.5V8.06c0-.96.27-1.62 1.67-1.62h1.78V3.47c-.31-.04-1.36-.12-2.58-.12-2.55 0-4.3 1.56-4.3 4.42v2.42H7.25v3.31h2.82V22h3.43Z" />
+    </svg>
   );
 }
 
