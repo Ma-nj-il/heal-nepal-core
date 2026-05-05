@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { RequestDemoDialog } from "@/components/RequestDemoDialog";
 import logo from "/logo-growfund.png?url";
 
 const NAV = [
@@ -53,12 +54,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/contact"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-brand-gradient text-white px-5 py-2.5 text-sm font-semibold shadow-soft hover:shadow-elegant transition"
-          >
-            Request Demo <ArrowRight className="h-4 w-4" />
-          </Link>
+          <RequestDemoDialog
+            trigger={
+              <button className="hidden sm:inline-flex items-center gap-2 rounded-full bg-brand-gradient text-white px-5 py-2.5 text-sm font-semibold shadow-soft hover:shadow-elegant transition">
+                Request Demo <ArrowRight className="h-4 w-4" />
+              </button>
+            }
+          />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
