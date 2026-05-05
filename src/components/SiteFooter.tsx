@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
-import logo from "/logo-growfund.png?url";
+import logo from "../../public/company-logo.jpeg";
 
 const socialLinks = [
   {
@@ -65,11 +65,8 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/60">
+        <div className="container mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row items-center justify-center gap-3 text-xs text-white/60">
           <p>© 2025 Growfund Pvt. Ltd. All rights reserved. · Kathmandu, Nepal</p>
-          <p className="flex items-center gap-1.5">
-            Built with <Heart className="h-3.5 w-3.5 text-red-400 fill-red-400" /> for Nepal's healthcare
-          </p>
         </div>
       </div>
     </footer>
@@ -84,13 +81,6 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
-function GithubIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
-      <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.8-.25.8-.56v-2.02c-3.25.71-3.94-1.57-3.94-1.57-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.09 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.76.4-1.26.73-1.55-2.6-.3-5.34-1.3-5.34-5.79 0-1.28.46-2.33 1.2-3.15-.12-.3-.52-1.52.11-3.16 0 0 .98-.31 3.2 1.2a11 11 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.64.23 2.86.11 3.16.75.82 1.2 1.87 1.2 3.15 0 4.5-2.74 5.48-5.35 5.78.41.35.77 1.05.77 2.12v3.14c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
-    </svg>
-  );
-}
 
 function TwitterIcon({ className }: { className?: string }) {
   return (
