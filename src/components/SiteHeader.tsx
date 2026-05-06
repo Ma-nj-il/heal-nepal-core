@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { RequestDemoDialog } from "@/components/RequestDemoDialog";
-import logo from "../../public/company-logo.jpeg";
+import logo from "../../public/company-logo.png";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -33,10 +33,10 @@ export function SiteHeader() {
     >
       <div className="container mx-auto h-full px-4 md:px-6 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <img src={logo} alt="Growfund" className="h-9 w-9 object-contain" />
-          <span className="font-display font-extrabold text-lg text-brand-deep tracking-tight">
+          <img src={logo} alt="Growfund" className="h-50 w-50 object-contain" />
+          {/* <span className="font-display font-extrabold text-lg text-brand-deep tracking-tight">
             Growfund
-          </span>
+          </span> */}
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

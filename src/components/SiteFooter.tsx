@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
-import logo from "../../public/company-logo.jpeg";
+import logo from "../../public/company-logo.png";
 
 const socialLinks = [
   {
