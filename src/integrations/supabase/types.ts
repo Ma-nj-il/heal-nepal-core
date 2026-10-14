@@ -14,6 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+          metadata: Json
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          metadata?: Json
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          metadata?: Json
+        }
+        Relationships: []
+      }
+      admin_profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          is_active: boolean
+          last_login_at: string | null
+          updated_at: string
+          user_id: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          is_active?: boolean
+          last_login_at?: string | null
+          updated_at?: string
+          user_id: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          is_active?: boolean
+          last_login_at?: string | null
+          updated_at?: string
+          user_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      app_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          updated_by: string | null
+          value: Json
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          value: Json
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: Json
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -92,6 +176,146 @@ export type Database = {
         }
         Relationships: []
       }
+      form_submissions: {
+        Row: {
+          archived_at: string | null
+          assigned_to: string | null
+          created_at: string
+          email: string
+          facility_type: string | null
+          follow_up_date: string | null
+          form_type: string
+          full_name: string
+          id: string
+          message: string | null
+          organization: string | null
+          phone: string | null
+          product: string | null
+          province: string | null
+          ref_code: string
+          requester_role: string | null
+          source_page: string | null
+          status: string
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          archived_at?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          email: string
+          facility_type?: string | null
+          follow_up_date?: string | null
+          form_type: string
+          full_name: string
+          id?: string
+          message?: string | null
+          organization?: string | null
+          phone?: string | null
+          product?: string | null
+          province?: string | null
+          ref_code?: string
+          requester_role?: string | null
+          source_page?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          archived_at?: string | null
+          assigned_to?: string | null
+          created_at?: string
+          email?: string
+          facility_type?: string | null
+          follow_up_date?: string | null
+          form_type?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          organization?: string | null
+          phone?: string | null
+          product?: string | null
+          province?: string | null
+          ref_code?: string
+          requester_role?: string | null
+          source_page?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      privacy_policy_versions: {
+        Row: {
+          content: string
+          created_at: string
+          created_by: string | null
+          id: string
+          published_at: string | null
+          published_by: string | null
+          status: string
+          title: string
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          published_at?: string | null
+          published_by?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          version: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          published_at?: string | null
+          published_by?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      submission_notes: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          submission_id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          submission_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          submission_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submission_notes_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "form_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -125,9 +349,32 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_manager: { Args: { _user_id: string }; Returns: boolean }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
+      is_super_admin: { Args: { _user_id: string }; Returns: boolean }
+      publish_privacy_policy: { Args: { _id: string }; Returns: undefined }
+      record_admin_login: { Args: never; Returns: undefined }
+      submit_form: {
+        Args: {
+          _email: string
+          _facility_type?: string
+          _form_type: string
+          _full_name: string
+          _message?: string
+          _organization?: string
+          _phone?: string
+          _product?: string
+          _province?: string
+          _requester_role?: string
+          _source_page?: string
+          _subject?: string
+          _website?: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "super_admin" | "staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -255,7 +502,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "super_admin", "staff"],
     },
   },
 } as const
