@@ -21,6 +21,8 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin.dashboard.index'
+import { Route as AdminDashboardSubmissionsRouteImport } from './routes/admin.dashboard.submissions'
+import { Route as AdminDashboardPrivacyRouteImport } from './routes/admin.dashboard.privacy'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -82,6 +84,17 @@ const AdminDashboardIndexRoute = AdminDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
+const AdminDashboardSubmissionsRoute =
+  AdminDashboardSubmissionsRouteImport.update({
+    id: '/submissions',
+    path: '/submissions',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardPrivacyRoute = AdminDashboardPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,6 +108,8 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/dashboard/privacy': typeof AdminDashboardPrivacyRoute
+  '/admin/dashboard/submissions': typeof AdminDashboardSubmissionsRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -108,6 +123,8 @@ export interface FileRoutesByTo {
   '/products': typeof ProductsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
+  '/admin/dashboard/privacy': typeof AdminDashboardPrivacyRoute
+  '/admin/dashboard/submissions': typeof AdminDashboardSubmissionsRoute
   '/admin/dashboard': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -123,6 +140,8 @@ export interface FileRoutesById {
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/dashboard/privacy': typeof AdminDashboardPrivacyRoute
+  '/admin/dashboard/submissions': typeof AdminDashboardSubmissionsRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -139,6 +158,8 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/admin/'
+    | '/admin/dashboard/privacy'
+    | '/admin/dashboard/submissions'
     | '/admin/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -152,6 +173,8 @@ export interface FileRouteTypes {
     | '/products'
     | '/admin/login'
     | '/admin'
+    | '/admin/dashboard/privacy'
+    | '/admin/dashboard/submissions'
     | '/admin/dashboard'
   id:
     | '__root__'
@@ -166,6 +189,8 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/login'
     | '/admin/'
+    | '/admin/dashboard/privacy'
+    | '/admin/dashboard/submissions'
     | '/admin/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -269,14 +294,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardIndexRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
+    '/admin/dashboard/submissions': {
+      id: '/admin/dashboard/submissions'
+      path: '/submissions'
+      fullPath: '/admin/dashboard/submissions'
+      preLoaderRoute: typeof AdminDashboardSubmissionsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/privacy': {
+      id: '/admin/dashboard/privacy'
+      path: '/privacy'
+      fullPath: '/admin/dashboard/privacy'
+      preLoaderRoute: typeof AdminDashboardPrivacyRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
   }
 }
 
 interface AdminDashboardRouteChildren {
+  AdminDashboardPrivacyRoute: typeof AdminDashboardPrivacyRoute
+  AdminDashboardSubmissionsRoute: typeof AdminDashboardSubmissionsRoute
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
 }
 
 const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
+  AdminDashboardPrivacyRoute: AdminDashboardPrivacyRoute,
+  AdminDashboardSubmissionsRoute: AdminDashboardSubmissionsRoute,
   AdminDashboardIndexRoute: AdminDashboardIndexRoute,
 }
 
